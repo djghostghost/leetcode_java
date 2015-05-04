@@ -43,12 +43,4 @@ public class RemoveDuplicates {
         }
         return start;
     }
-
-    public static void  main(String[] args) {
-        RemoveDuplicates rm=new RemoveDuplicates();
-        int nums[]={1,1,1,1,2,2,2,3,3,3,3,3,4,4,4,4};
-        System.out.print(rm.removeDuplicates(nums));
-
-
-    }
 }
