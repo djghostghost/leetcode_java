@@ -19,7 +19,7 @@ public class RemoveDuplicates {
 
     public int removeDuplicates(int[] nums){
 
-        if(nums==null || nums.length==0){
+        if(nums==null || nums.length==0 ){
             return 0;
         }
 
