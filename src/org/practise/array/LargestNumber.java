@@ -1,8 +1,5 @@
 package org.practise.array;
 
-import com.sun.tools.javac.util.ArrayUtils;
-import jdk.nashorn.internal.ir.LiteralNode;
-
 import java.util.*;
 import java.util.Comparator;
 

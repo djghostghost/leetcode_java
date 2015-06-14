@@ -1,6 +1,7 @@
 package org.practise.string;
 
 import java.util.*;
+import java.util.stream.Collector;
 
 /**
  * Created by liguoxiang on 5/29/15.
@@ -50,15 +51,69 @@ public class Parentheses {
           return null;
       }
 
+      int leftCount=0;
+      int rightCount=0;
 
+      Stack<Character> stack=new Stack<>();
+      List<String> parenthesis=new ArrayList<>();
 
+      stack.push('(');
+      leftCount++;
+      Boolean flag=true;
 
-      return null;
+      while(!stack.isEmpty()){
+
+          if(leftCount<n){
+              stack.push('(');
+              leftCount++;
+          }else if(rightCount<n) {
+              stack.push(')');
+              rightCount++;
+          }else{
+              parenthesis.add(stackToString(stack));
+              flag=true;
+              while(!stack.isEmpty() && stack.peek()!='(') {
+                  char c = stack.pop();
+                  rightCount--;
+                  if (c == ')' && stack.peek() == '(' && flag) {
+                      stack.pop();
+                      leftCount--;
+                  } else {
+                      flag = false;
+                  }
+              }
+              if(stack.isEmpty()){
+                  break;
+              }
+
+              stack.pop();
+              stack.push(')');
+
+              leftCount--;
+              rightCount++;
+          }
+      }
+
+      return parenthesis;
   }
+    public String stackToString(Stack<Character> stack){
+        if(stack.isEmpty()){
+            return "";
+        }else{
+            StringBuilder strBuilder=new StringBuilder();
+            for(Character c:stack){
+                strBuilder.append(c);
+            }
+            return strBuilder.toString();
+        }
+    }
     public static void main(String[] args) {
         Parentheses validParentheses=new Parentheses();
-        System.out.println(validParentheses.isValid("]"));
-
+//        System.out.println(validParentheses.isValid("]"));
+        List<String> results=validParentheses.generateParenthesis(4);
+        for(String result:results) {
+            System.out.println(result);
+        }
     }
 
 }
