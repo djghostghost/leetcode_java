@@ -44,12 +44,17 @@ public class Anagrams {
 
     public String newHashCode(String str){
 
-        str=str.replaceAll("\\s","");
+
         char[] chars=str.toCharArray();
         Arrays.sort(chars);
         return String.valueOf(chars);
     }
 
+    public boolean isAnagram(String s,String t){
+        String hashCodeS=newHashCode(s);
+        String hashCodeT=newHashCode(t);
+        return hashCodeS.equals(hashCodeT);
+    }
 
 
     public static void main(String[] args) {
