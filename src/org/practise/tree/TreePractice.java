@@ -33,7 +33,40 @@ public class TreePractice {
                         1+getHeight(root.right));
     }
 
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        if(root==null){
+            return root;
+        }
+
+        TreeNode p1=new TreeNode(Math.min(p.val,q.val));
+        TreeNode q1=new TreeNode(Math.max(p.val,q.val));
+
+        if(p1.val==root.val || q1.val==root.val) {
+            return root;
+        }else if(p1.val<root.val && q1.val>root.val){
+            return root;
+        }else if(p1.val<root.val && q1.val<root.val){
+            return lowestCommonAncestor(root.left,p1,q1);
+        }else{
+            return lowestCommonAncestor(root.right,p1,q1);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        TreePractice sol=new TreePractice();
+        int nums[]={2,1,3};
+
+        TreeNode root=TreeNode.initTreeByArray(nums);
+
+        TreeNode p=new TreeNode(3);
+        TreeNode q=new TreeNode(1);
+
+        System.out.println(sol.lowestCommonAncestor(root,p,q).val);
 
 
+
+    }
 
 }

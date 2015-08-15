@@ -15,7 +15,7 @@ public class TreeNode {
 
     }
 
-    public TreeNode initTreeByArray(int[] nums){
+    public static TreeNode initTreeByArray(int[] nums){
         TreeNode nodes[]=new TreeNode[nums.length];
 
         int i=0;
