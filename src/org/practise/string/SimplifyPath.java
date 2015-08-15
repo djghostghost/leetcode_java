@@ -31,7 +31,7 @@ public class SimplifyPath {
         }else {
             String[] strs = new String[stack.size()];
             stack.toArray(strs);
-            return mark + String.join("/", strs);
+            return mark ;//+ String.join("/", strs);
         }
     }
 

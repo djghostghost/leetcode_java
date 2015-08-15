@@ -1,7 +1,7 @@
 package org.practise.array;
 
 import java.util.*;
-import java.util.Comparator;
+
 
 /**
  * Created by liguoxiang on 6/13/15.
@@ -15,14 +15,14 @@ public class LargestNumber {
             return "0";
         }
         List<Integer> list=getList(nums);
-        list.sort(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                String str1=o1.toString();
-                String str2=o2.toString();
-                return (str2+str1).compareTo(str1+str2);
-            }
-        });
+//        list.sort(new Comparator<Integer>() {
+//            @Override
+//            public int compare(Integer o1, Integer o2) {
+//                String str1=o1.toString();
+//                String str2=o2.toString();
+//                return (str2+str1).compareTo(str1+str2);
+//            }
+//        });
 
         if(list.get(0)==0){
             return "0";

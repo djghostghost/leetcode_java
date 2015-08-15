@@ -1,7 +1,7 @@
 package org.practise.string;
 
 import java.util.*;
-import java.util.stream.Collector;
+
 
 /**
  * Created by liguoxiang on 5/29/15.
