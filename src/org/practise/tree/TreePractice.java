@@ -1,5 +1,8 @@
 package org.practise.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by liguoxiang on 7/4/15.
  */
@@ -53,17 +56,53 @@ public class TreePractice {
         }
 
     }
+//    leetcode #257
+    public List<String> binaryTreePaths(TreeNode root) {
 
-    public static void main(String[] args) {
-        TreePractice sol=new TreePractice();
-        int nums[]={2,1,3};
 
-        TreeNode root=TreeNode.initTreeByArray(nums);
+        List<String> results=new ArrayList<>();
+        if(root==null){
+            results.add("");
+            return results;
+        }
+        if(root.left==null && root.right==null){
+            results.add(String.valueOf(root.val));
+            return results;
+        }
 
-        TreeNode p=new TreeNode(3);
-        TreeNode q=new TreeNode(1);
+        if(root.left!=null){
+            List<String> leftpaths=binaryTreePaths(root.left);
+            for(String path:leftpaths){
+                results.add(root.val+"->"+path);
+            }
 
-        System.out.println(sol.lowestCommonAncestor(root,p,q).val);
+
+        }
+
+        if(root.right!=null){
+            List<String> rightpaths=binaryTreePaths(root.right);
+            for(String path:rightpaths){
+                results.add(root.val+"->"+path);
+            }
+        }
+        return results;
+
+
+    }
+
+        public static void main(String[] args) {
+            TreePractice sol=new TreePractice();
+            int nums[]={1,2,3,-1,5};
+
+            TreeNode root=TreeNode.initTreeByArray(nums);
+
+            TreeNode p=new TreeNode(3);
+            TreeNode q=new TreeNode(1);
+
+            List<String> results=sol.binaryTreePaths(root);
+            for(String result:results){
+                System.out.println(result);
+            }
 
 
 
