@@ -35,5 +35,28 @@ public class BitManipulation {
         return result;
     }
 
+    //leetcode 268
+    //n=10000 n+1=10001
+    //if
+    public int missingNumber(int[] nums){
+
+        if(nums==null || nums.length==0){
+            return 0;
+        }
+        int res=0;
+
+        for(int i=0;i<nums.length;i++){
+            res^=nums[i]^i+1;
+        }
+        return res;
+
+    }
+
+    public static void main(String[] args) {
+        BitManipulation sol=new BitManipulation();
+        int nums[]={0,1,3};
+        System.out.println(sol.missingNumber(nums));
+    }
+
 
 }
