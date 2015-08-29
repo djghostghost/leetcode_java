@@ -52,10 +52,33 @@ public class BitManipulation {
 
     }
 
+    /**
+     * leetcode #190
+     * @param n
+     * @return int
+     */
+
+    public int reverseBits(int n) {
+        final int sizeOfInt=32;
+
+        for(int i=0;i<(sizeOfInt>>1);i++){
+            int j=sizeOfInt-i-1;
+
+            if((((n>>i)&1)^((n>>j)&1))==1){
+                n^=((1<<i) |(1<<j));
+            }
+
+
+        }
+
+        return n;
+
+    }
+
     public static void main(String[] args) {
         BitManipulation sol=new BitManipulation();
-        int nums[]={0,1,3};
-        System.out.println(sol.missingNumber(nums));
+        int n=43261596;
+        System.out.println(sol.reverseBits(n));
     }
 
 
