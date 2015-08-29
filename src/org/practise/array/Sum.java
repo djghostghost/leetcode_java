@@ -17,30 +17,43 @@ public class Sum {
         Arrays.sort(nums);
 
         int n=nums.length;
-        for(int i=0;i<n;i++){
-            int j=n-1;
-            int k=i+1;
-            int a=nums[i];
-            if(nums[i]>0){
-                break;
-            }
-            if(i>0 && nums[i]==nums[i-1]){
-                continue;
+        for(int i=0;(i<n && nums[i]<=0);i++){
+
+            while(i>0 && i<n-2 && nums[i]==nums[i-1]){
+                i++;
             }
 
+            int j=n-1;
+            int k=i+1;
+
+
+            if(i>=n || nums[i]>0 )break;
             while(k<j){
-                if(nums[j]+nums[k]+a>0){
-                    j--;
-                }else if(nums[j]+nums[k]+a<0){
-                    k++;
+                if(nums[j]+nums[k]+nums[i]>0){
+                    do{
+                        j--;
+                    }while(j>k && nums[j]==nums[j+1]);
+
+
+                }else if(nums[j]+nums[k]+nums[i]<0){
+
+                    do{
+                        k++;
+                    }while(j>k && nums[k]==nums[k-1]);
+
                 }else{
                     List<Integer> result=new ArrayList<>();
                     result.add(nums[i]);
                     result.add(nums[k]);
                     result.add(nums[j]);
                     results.add(result);
-                    k++;
-                    j--;
+                    do{
+                        k++;
+                    }while(k<j && nums[k]==nums[k-1]);
+
+                    do{
+                        j--;
+                    }while(k<j && nums[j]==nums[j+1]);
                 }
 
             }
@@ -51,19 +64,4 @@ public class Sum {
         return results;
     }
 
-    public static void main(String[] args) {
-        int[] nums={-1,-1,0,1,2,-1,-4};
-        Sum sol=new Sum();
-        List<List<Integer>> results=sol.threeSum(nums);
-
-        for(List<Integer> result:results){
-            for(Integer num:result){
-                System.out.print(num+"-->");
-            }
-            System.out.println();
-        }
-
-
-
-    }
 }
