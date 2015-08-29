@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * Created by liguoxiang on 5/31/15.
- *隣の姉様綺麗
+ *
  *
  * /
 
@@ -17,6 +17,7 @@ Some examples:
 */
 
 public class RPN {
+  //leetcode 150
   public int evalRPN(String[] tokens){
       if(tokens==null || tokens.length==0 ){
           return 0;
@@ -26,28 +27,30 @@ public class RPN {
 
       for(String token:tokens){
 
-          if(token.matches("[\\+\\-\\*\\/]")){
-              Integer top1=stack.pop();
-              Integer top2=stack.pop();
               switch(token){
                   case "+":
-                      stack.push(top1+top2);
+                      stack.push(stack.pop()+stack.pop());
                       break;
                   case "-":
-                      stack.push(top2-top1);
+                      stack.push(-stack.pop()+stack.pop());
                       break;
 
                   case "*":
-                      stack.push(top1*top2);
+                      stack.push(stack.pop()*stack.pop());
                       break;
 
                   case "/":
-                      stack.push((int)(top2/top1));
+                      int n1=stack.pop();
+                      int n2=stack.pop();
+                      stack.push((int)(n2/n1));
                       break;
+
+                  default:
+                      stack.push(Integer.parseInt(token));
+
               }
-          }else{
-              stack.push(Integer.parseInt(token));
-          }
+
+
 
       }
 
@@ -56,9 +59,9 @@ public class RPN {
 
     public static void main(String[] args) {
         RPN rpn=new RPN();
-        String tokens[]={"3", "4", "/"};
-        String tokens1[]={"4", "13", "5", "/", "+","5","*"};
-        System.out.println(rpn.evalRPN(tokens));
+        String tokens[]={"13", "5", "/"};
+        String tokens1[]={"4", "13", "5", "/", "+"};
+        System.out.println(rpn.evalRPN(tokens1));
 
     }
 
