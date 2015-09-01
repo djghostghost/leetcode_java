@@ -44,34 +44,70 @@ public class NumberToWords {
         dict.put(1000000,"Million");
         dict.put(1000000000, "Billion");
 
+
+        StringBuilder sb=new StringBuilder();
         if(dict.containsKey(num)){
-            //return dict.get(num);
+            return dict.get(num);
 
         }else{
-//            while(dict.containsKey(num)){
-//
-//            }
+
+            int deno=1000;
+            int n=1000;
+            while(num!=0){
+                int mod=num%deno;
+                System.out.println(mod);
+                num=(num-mod)/deno;
+                if(n>0){
+                    sb.insert(0,dict.get(n));
+                }
+
+                if(dict.containsKey(mod)){
+
+                    sb.append(dict.get(mod));
+                }else{
+
+                    if(mod/100 >0){
+
+                        sb.append(dict.get(mod/100));
+                        sb.append(dict.get(100));
+                        mod = mod%100;
+                    }
+
+
+                    if( dict.containsKey(mod)){
+                        sb.append(dict.get(mod));
+
+                    }else {
+
+
+                        dict.get((mod / 10) * 10);
+
+                        if (mod % 10 != 0) {
+                            sb.append(dict.get(mod%10));
+                        }
+                    }
+
+
+                }
 
 
 
+
+                n*=1000;
+            }
+
+
+            return  sb.toString();
 
         }
 
 
 
-        for(Integer key:dict.keySet()){
-            System.out.println(key);
-        }
-
-
-
-
-        return "0";
     }
 
     public static void main(String[] args) {
         NumberToWords sol=new NumberToWords();
 
-        sol.numberToWords(3);
+        System.out.println(sol.numberToWords(1111111));
     }
 }
