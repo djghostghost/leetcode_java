@@ -74,11 +74,46 @@ public class BinarySearch {
         return nums[mid];
     }
 
+    //leetcode 278
+    public int firstBadVersion(int n) {
+        int high=n;
+        int low=2;
+
+        int mid=0;
+
+        if(isBadVersion(1)){
+            return 1;
+        }
+
+        while(low<=high){
+            mid=low+((high-low)>>1);
+
+            if(isBadVersion(mid) && !isBadVersion(mid-1)){
+                break;
+            }else if(isBadVersion(mid) && isBadVersion(mid-1)){
+                high=mid-1;
+            }else{
+                low=mid+1;
+            }
+
+        }
+
+        return mid;
+    }
+
+    public boolean isBadVersion(int version){
+        if(version>=3){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public static void main(String[] args) {
         int nums[]={0,2,-2,-1};
         BinarySearch sol=new BinarySearch();
 
-        System.out.println(sol.findMin(nums));
+        int n=3;
+        System.out.println(sol.firstBadVersion(4));
 
     }
 
