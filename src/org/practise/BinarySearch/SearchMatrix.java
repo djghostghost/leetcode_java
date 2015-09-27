@@ -1,8 +1,5 @@
 package org.practise.BinarySearch;
 
-/**
- * Created by ghost on 2015/9/27.
- */
 public class SearchMatrix {
     //leetcode 240#
     public boolean searchMatrix(int[][] matrix, int target) {
