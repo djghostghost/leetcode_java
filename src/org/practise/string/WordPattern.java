@@ -1,5 +1,6 @@
 package org.practise.string;
 
+import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
@@ -21,7 +22,7 @@ public class WordPattern {
             return false;
         }
 
-        Hashtable<Character,String> patternHashTable=new Hashtable<>();
+        java.util.Hashtable<Character,String> patternHashTable=new java.util.Hashtable<>();
         for(int i=0;i<pattern.length();i++) {
             Character ch = pattern.charAt(i);
             if (patternHashTable.containsKey(ch)) {
