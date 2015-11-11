@@ -32,10 +32,4 @@ public class MaximumProductSubarray {
         return maxResult;
     }
 
-    public static void main(String[] args) {
-        MaximumProductSubarray sol=new MaximumProductSubarray();
-        int[] nums={-2,3,-2,4};
-        System.out.println(sol.maxProduct(nums));
-
-    }
 }
