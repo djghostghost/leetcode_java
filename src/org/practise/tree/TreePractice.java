@@ -1,6 +1,7 @@
 package org.practise.tree;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -34,6 +35,32 @@ public class TreePractice {
         }
 
         return nodes;
+
+    }
+
+//  leetcode 144
+    public List<Integer> preorderTraversal(TreeNode root) {
+        LinkedList<Integer> ress=new LinkedList<>();
+        if(root==null){
+            return ress;
+        }
+
+        Stack<TreeNode> stack=new Stack<>();
+
+        TreeNode p=root;
+        while(!stack.isEmpty()||p!=null){
+            if(p!=null){
+                ress.add(p.val);
+                if(p.right!=null){
+                    stack.push(p.right);
+                }
+                p=p.left;
+            }else{
+                p=stack.pop();
+            }
+        }
+
+        return ress;
 
     }
 
@@ -121,7 +148,7 @@ public class TreePractice {
 
             TreeNode root=TreeNode.initTreeByArray(nums);
 
-            List<Integer> nodes=sol.inorderTraversal(root);
+            List<Integer> nodes=sol.preorderTraversal(root);
 
             for(int n:nodes){
                 System.out.print(n+"->");
