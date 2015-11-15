@@ -2,13 +2,38 @@ package org.practise.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by liguoxiang on 7/4/15.
  */
 public class TreePractice {
+//leetcode 94
+    public List<Integer> inorderTraversal(TreeNode root){
 
-    public void vistTreeByPreOder(TreeNode root){
+        ArrayList<Integer> nodes=new ArrayList<>();
+        if(root==null){
+            return nodes;
+        }
+
+        Stack<TreeNode> stack=new Stack<>();
+        TreeNode p=root;
+        while(!stack.isEmpty()||p!=null){
+
+            if(p!=null){
+                stack.push(p);
+                p=p.left;
+
+            }else{
+                p=stack.pop();
+                nodes.add(p.val);
+                p=p.right;
+            }
+
+
+        }
+
+        return nodes;
 
     }
 
@@ -92,17 +117,16 @@ public class TreePractice {
 
         public static void main(String[] args) {
             TreePractice sol=new TreePractice();
-            int nums[]={1,2,3,-1,5};
+            int nums[]={1,2,3,5};
 
             TreeNode root=TreeNode.initTreeByArray(nums);
 
-            TreeNode p=new TreeNode(3);
-            TreeNode q=new TreeNode(1);
+            List<Integer> nodes=sol.inorderTraversal(root);
 
-            List<String> results=sol.binaryTreePaths(root);
-            for(String result:results){
-                System.out.println(result);
+            for(int n:nodes){
+                System.out.print(n+"->");
             }
+            System.out.println();
 
 
 
