@@ -1,8 +1,10 @@
 package org.practise.backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+import java.util.Collections;
 
 /**
  * leetcode #39
@@ -15,56 +17,46 @@ import java.util.Stack;
  * The solution set must not contain duplicate combinations.
  */
 public class CombinationSum {
-    public List<List<Integer>> combinationSum(int[] candidates,int target){
-        if(candidates==null || candidates.length==0 || target==0){
-            return null;
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> combinations=new ArrayList<>();
+        if(candidates==null || candidates.length==0){
+            return combinations;
         }
-        List<List<Integer>> results=new ArrayList<>();
-        Stack<Integer> stack=new Stack<>();
+        Arrays.sort(candidates);
+        int len=candidates.length-1;
+        Stack<Integer> ress=new Stack<>();
 
-        stack.push(candidates[0]);
-        int sum=candidates[0];
-        int i=0;
+        sumOfkNumber(target,candidates,len,ress,combinations);
+        return combinations;
+    }
+    public void sumOfkNumber(int sum,int nums[],int n,Stack<Integer> res,List<List<Integer>> combinations){
+        if(n<0||sum<=0){
+            return ;
+        }
 
-
-        while(!stack.isEmpty()){
-
-            if(sum<target){
-                if(i<candidates.length) {
-                    stack.push(candidates[i]);
-                    sum += candidates[i];
-                }else{
-                    break;
-                }
-            }else if(sum==target){
-                List<Integer> result=new ArrayList<>();
-                result.addAll(stack);
-                results.add(result);
+        if(sum==nums[n]){
 
 
-                if(i==candidates.length-1){
-                    break;
-                }
+            ArrayList<Integer> temp=new ArrayList<Integer>();
+            temp.addAll(res);
 
-                do{
-                    sum-=stack.pop();
-                }while((candidates[i+1]+sum)>target && !stack.isEmpty());
-
-                if(stack.isEmpty()){
-                    break;
-                }
-                i+=1;
-
-            }else if(sum>target){
-                do{
-                    sum-=stack.pop();
-                }while((candidates[i+1]+sum)>target);
-                i++;
-            }
+            temp.add(nums[n]);
+            Collections.reverse(temp);
+            combinations.add(temp);
 
         }
 
-        return results;
+        res.push(nums[n]);
+        int tempSum=sum-nums[n];
+        if(tempSum>=nums[n]){
+            sumOfkNumber(tempSum,nums,n,res,combinations);
+        }else{
+            sumOfkNumber(tempSum,nums,n-1,res,combinations);
+        }
+
+        res.pop();
+        sumOfkNumber(sum,nums,n-1,res,combinations);
+
     }
 
     public static void main(String[] args) {
