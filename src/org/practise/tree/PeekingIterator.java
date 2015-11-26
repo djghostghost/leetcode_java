@@ -1,4 +1,4 @@
-package org.practise.other;
+package org.practise.tree;
 
 import java.util.Iterator;
 import java.util.ListIterator;
