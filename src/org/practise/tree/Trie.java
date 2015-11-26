@@ -99,4 +99,7 @@ public class Trie {
 
         return true;
     }
+    public TrieNode getRoot(){
+        return this.root;
+    }
 }
