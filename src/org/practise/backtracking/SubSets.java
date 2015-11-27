@@ -1,8 +1,9 @@
-package org.practise.array;
+package org.practise.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by garrus on 15/06/14.
@@ -14,7 +15,7 @@ Elements in a subset must be in non-descending order.
 The solution set must not contain duplicate subsets.
 */
 public class SubSets {
-    public List<List<Integer>> subsets(int[] nums){
+    public List<List<Integer>> subsetsByBit(int[] nums){
 
         if(nums==null || nums.length==0){
             return null;
@@ -48,18 +49,29 @@ public class SubSets {
 
         return subSet;
     }
-
-    public static void main(String[] args) {
-        SubSets subSets=new SubSets();
-        int[] array={4,1,0};
-        List<List<Integer>> subsets=subSets.subsets(array);
-
-        for(List<Integer> subset:subsets){
-            for(Integer element:subset){
-                System.out.print(element + "->");
-            }
-            System.out.println();
+//leetcode 78
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> results=new ArrayList<>();
+        if(nums==null||nums.length==0){
+            return results;
         }
+        Arrays.sort(nums);
+        subsetsHelper(0,nums,nums.length,new Stack<Integer>(),results);
+        return results;
+
+    }
+
+
+    public void subsetsHelper(int index, int[] nums, int len, Stack<Integer> prefix, List<List<Integer>> ress){
+        if(index==len){
+            ress.add(new ArrayList<Integer>(prefix));
+            return;
+        }
+
+        prefix.push(nums[index]);
+        subsetsHelper(index+1,nums,len,prefix,ress);
+        prefix.pop();
+        subsetsHelper(index+1,nums,len,prefix,ress);
 
     }
 
