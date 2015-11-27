@@ -64,6 +64,38 @@ public class TreePractice {
 
     }
 
+//  leetcode 145
+    public List<Integer> postorderTraversal(TreeNode root) {
+        LinkedList<Integer> ress=new LinkedList<>();
+        if(root==null){
+            return ress;
+        }
+
+        TreeNode lastVistedNode=null;
+        Stack<TreeNode> stack=new Stack<>();
+        while(!stack.isEmpty() || root!=null){
+
+            if(root!=null){
+                stack.push(root);
+                root=root.left;
+            }else{
+                TreeNode peekNode=stack.peek();
+                if(peekNode.right!=null && lastVistedNode!=peekNode.right){
+                    root=peekNode.right;
+                }else{
+                    ress.add(peekNode.val);
+                    lastVistedNode=stack.pop();
+                }
+            }
+
+        }
+
+        return ress;
+
+
+
+    }
+
     public boolean isBalanced(TreeNode root){
         if(root==null){
             return true;
@@ -142,21 +174,5 @@ public class TreePractice {
 
     }
 
-        public static void main(String[] args) {
-            TreePractice sol=new TreePractice();
-            int nums[]={1,2,3,5};
-
-            TreeNode root=TreeNode.initTreeByArray(nums);
-
-            List<Integer> nodes=sol.preorderTraversal(root);
-
-            for(int n:nodes){
-                System.out.print(n+"->");
-            }
-            System.out.println();
-
-
-
-    }
 
 }
