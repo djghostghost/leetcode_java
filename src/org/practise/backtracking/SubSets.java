@@ -75,4 +75,31 @@ public class SubSets {
 
     }
 
+    //leetcode 90
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> results=new ArrayList<>();
+        if(nums==null||nums.length==0){
+            return results;
+        }
+        Arrays.sort(nums);
+        subsetsWithDupHelper(0,nums,nums.length,new Stack<Integer>(),results);
+        return results;
+
+    }
+
+
+    public void subsetsWithDupHelper(int index,int[] nums,int len,Stack<Integer> prefix,List<List<Integer>> ress){
+
+        ress.add(new ArrayList<Integer>(prefix));
+
+        for(int i=index;i<len;i++){
+            if(i>index && nums[i]==nums[i-1]){
+                continue;
+            }
+            prefix.push(nums[i]);
+            subsetsWithDupHelper(i+1,nums,len,prefix,ress);
+            prefix.pop();
+        }
+    }
+
 }
