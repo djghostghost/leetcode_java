@@ -32,7 +32,7 @@ public class MoveZeros {
 
     public static void main(String[] args) {
         MoveZeros sol=new MoveZeros();
-        int[] nums={0,0,0,0};
+        int[] nums={1};
         sol.moveZeroes(nums);
 
         for(int num:nums){
