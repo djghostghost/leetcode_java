@@ -25,12 +25,13 @@ public class CombinationSum {
         stack.push(candidates[0]);
         int sum=candidates[0];
         int i=0;
+        int len=candidates.length;
 
 
         while(!stack.isEmpty()){
 
             if(sum<target){
-                if(i<candidates.length) {
+                if(i<candidates.length&& candidates[i]<target) {
                     stack.push(candidates[i]);
                     sum += candidates[i];
                 }else{
@@ -53,13 +54,17 @@ public class CombinationSum {
                 if(stack.isEmpty()){
                     break;
                 }
-                i+=1;
+                i++;
 
             }else if(sum>target){
                 do{
+                    System.out.println(stack.peek());
                     sum-=stack.pop();
-                }while((candidates[i+1]+sum)>target);
+
+                }while(i<(len-1)&&(candidates[i+1]+sum)>target);
                 i++;
+
+
             }
 
         }
@@ -69,7 +74,7 @@ public class CombinationSum {
 
     public static void main(String[] args) {
         CombinationSum com=new CombinationSum();
-        int[] nums={2,3,4};
+        int[] nums={1,3,4,6,7};
         List<List<Integer>> results=com.combinationSum(nums,7);
 
         for(List<Integer> result:results){
