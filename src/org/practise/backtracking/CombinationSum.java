@@ -181,14 +181,36 @@ public class CombinationSum {
 
     }
 
-    public static void main(String[] args) {
-        CombinationSum com=new CombinationSum();
-        int[] nums={1,2};
-        List<List<Integer>> results=com.combinationSum2(nums,2);
+    //leetcode 216
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> ress=new ArrayList<>();
 
-        for(List<Integer> result:results){
-            System.out.println(result);
+        if(k<=0|| n<=0 || n<k){
+            return ress;
         }
+        combinationSum3Helper(k,n,9,new Stack<Integer>(),ress);
+        return ress;
+    }
+
+    public void combinationSum3Helper(int k,int n,int res,
+                                      Stack<Integer> stack,List<List<Integer>> ress){
+
+        if(k<0 || n<0|| res<=0)return;
+
+
+        if(k==1&& n==res){
+            ArrayList<Integer> list=new ArrayList<>(stack);
+            list.add(res);
+            Collections.reverse(list);
+            ress.add(list);
+
+
+        }
+
+        stack.push(res);
+        combinationSum3Helper(k-1,n-res,res-1,stack,ress);
+        stack.pop();
+        combinationSum3Helper(k,n,res-1,stack,ress);
 
     }
 
