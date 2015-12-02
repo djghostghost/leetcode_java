@@ -141,36 +141,25 @@ public class TreePractice {
 
     }
 //    leetcode #257
-    public List<String> binaryTreePaths(TreeNode root) {
+public List<String> binaryTreePaths(TreeNode root) {
+    List<String> ress=new ArrayList<>();
+    if(root==null){
+        return ress;
+    }
 
+    binaryTreePathsHelper(root,"",ress);
+    return ress;
+}
 
-        List<String> results=new ArrayList<>();
-        if(root==null){
-            results.add("");
-            return results;
-        }
+    public void binaryTreePathsHelper(TreeNode root,String path,List<String> ress){
         if(root.left==null && root.right==null){
-            results.add(String.valueOf(root.val));
-            return results;
+            path+=root.val;
+            ress.add(path);
+            return;
         }
 
-        if(root.left!=null){
-            List<String> leftpaths=binaryTreePaths(root.left);
-            for(String path:leftpaths){
-                results.add(root.val+"->"+path);
-            }
-
-
-        }
-
-        if(root.right!=null){
-            List<String> rightpaths=binaryTreePaths(root.right);
-            for(String path:rightpaths){
-                results.add(root.val+"->"+path);
-            }
-        }
-        return results;
-
+        if(root.left!=null) binaryTreePathsHelper(root.left,path+root.val+"->",ress);
+        if(root.right!=null) binaryTreePathsHelper(root.right,path+root.val+"->",ress);
 
     }
 
