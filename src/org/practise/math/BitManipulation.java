@@ -75,10 +75,37 @@ public class BitManipulation {
 
     }
 
+    //leetcode 287
+    public int findDuplicate(int[] nums) {
+
+        int n=nums.length;
+        int entry=0;
+        for (; entry < n; entry++)
+            if (entry != nums[entry])
+                break;
+
+
+        int slow=entry;
+        int fast=entry;
+
+        do{
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        }while(slow!=fast);
+
+        slow=entry;
+        while(slow!=fast){
+            slow=nums[slow];
+            fast=nums[fast];
+        }
+        return slow;
+
+    }
+
     public static void main(String[] args) {
         BitManipulation sol=new BitManipulation();
-        int n=43261596;
-        System.out.println(sol.reverseBits(n));
+        int[] nums={1,1};
+        System.out.println(sol.findDuplicate(nums));
     }
 
 
