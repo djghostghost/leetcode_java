@@ -1,5 +1,10 @@
 package org.practise.array;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * Created by liguoxiang on 5/31/15.
  */
@@ -64,6 +69,35 @@ public class KTHELargest {
     }
     public int getRightIndex(int i){
         return (i<<1)+2;
+    }
+
+
+    public int findKthLargestByQuickSelect(int[] nums, int k){
+        List<Integer> list= IntStream.of(nums).boxed().collect(Collectors.toList());;
+        return quickSelect(list,k);
+
+    }
+    private int quickSelect(List<Integer> nums, int k){
+
+        int pivot=nums.get(0);
+
+        ArrayList<Integer> largerNum=new ArrayList<>();
+        ArrayList<Integer> littleNum=new ArrayList<>();
+        for(int i=1;i<nums.size();i++){
+            if(nums.get(i)<pivot){
+                littleNum.add(nums.get(i));
+            }else{
+                largerNum.add(nums.get(i));
+            }
+        }
+        if(largerNum.size()==k-1){
+            return pivot;
+        }else if(largerNum.size()>=k){
+            return quickSelect(largerNum,k);
+        }else{
+            return quickSelect(littleNum,k-largerNum.size()-1);
+        }
+
     }
 
     public static void main(String[] args) {
