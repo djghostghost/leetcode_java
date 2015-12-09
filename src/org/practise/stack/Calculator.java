@@ -17,7 +17,7 @@ public class Calculator {
         }
         s=s.replaceAll("\\s+", "");
 
-        Stack<Integer> stack=new Stack<Integer>();
+        Stack<Integer> stack=new Stack<>();
 
         int weight=1;
         stack.push(weight);
