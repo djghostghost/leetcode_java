@@ -101,12 +101,20 @@ public class BitManipulation {
         return slow;
 
     }
+    //leetcode 191
+    public int hammingWeight(int n) {
+        if(n==0) return 0;
 
-    public static void main(String[] args) {
-        BitManipulation sol=new BitManipulation();
-        int[] nums={1,1};
-        System.out.println(sol.findDuplicate(nums));
+        int count=0;
+        while(n!=0){
+            n=n&n-1;
+            count++;
+        }
+
+        return count;
+
     }
+
 
 
 }
