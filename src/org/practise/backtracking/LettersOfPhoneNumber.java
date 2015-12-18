@@ -3,8 +3,12 @@ package org.practise.backtracking;
 
 import java.util.*;
 
-
+/**
+ * leetcode 17
+ */
 public class LettersOfPhoneNumber {
+    private final String[] keys={" ","","abc","def","ghi"
+            ,"jkl","mno","pqrs","tuv","wxyz"};
     public List<String> letterCombinations(String digits) {
 
         List<String> letters=new ArrayList<>();
@@ -76,14 +80,28 @@ public class LettersOfPhoneNumber {
         return strBuilder.toString();
     }
 
-    public static void main(String[] args) {
-        LettersOfPhoneNumber sol=new LettersOfPhoneNumber();
-        List<String> letters=sol.letterCombinations("203");
+    public List<String> letterCombinationsByDSF(String digits) {
+        List<String> ress=new ArrayList<>();
+        if(digits==null||digits.length()==0) return ress;
+        letterCombinations(digits,0,"",ress);
+        return ress;
 
-        if(letters!=null){
-            for(String letter:letters){
-                System.out.println(letter);
-            }
+    }
+
+    private void letterCombinations(String digits,int index,String res,List<String> ress){
+
+        if(index>digits.length()){
+            return;
+        }
+
+        if(index==digits.length()){
+            ress.add(res);
+            return;
+        }
+        String letters=keys[(digits.charAt(index)-'0')];
+        for(int i=0;i<letters.length();i++){
+            char ch=letters.charAt(i);
+            letterCombinations(digits,index+1,res+ch,ress);
         }
 
     }
