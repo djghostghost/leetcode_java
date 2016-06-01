@@ -9,18 +9,24 @@ import java.util.Queue;
  * TIME  : 20:49
  * PACKAGE:org.practise.tree
  */
-public class PopulatingNextRightPointers {
-    public void connect(TreeLinkNode root) {
-        if(root==null || (root.right==null && root.right==null)) return;
+class TreeLinkNodeX{
+    public TreeLinkNodeX right;
+    public TreeLinkNodeX left;
+    public TreeLinkNodeX next;
+}
 
-        Queue<TreeLinkNode> queue=new LinkedList<>();
+public class PopulatingNextRightPointers {
+    public void connect(TreeLinkNodeX root) {
+        if(root==null || (root.right==null && root.left==null)) return;
+
+        Queue<TreeLinkNodeX> queue=new LinkedList<>();
 
         queue.add(root);
-        TreeLinkNode prev=null;
+        TreeLinkNodeX prev=null;
         int n=1;
         while(!queue.isEmpty()){
 
-            TreeLinkNode p=queue.poll();
+            TreeLinkNodeX p=queue.poll();
             if(p.left!=null){
                 queue.add(p.left);
             }
