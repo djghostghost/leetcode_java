@@ -6,66 +6,29 @@ Used to practise:
 
 3 tdd(whatever)
 
-public class UndirectedGraphTraversal {
 
-    private int count=0;
-    private ArrayList[] graph;
-    boolean[] visited;
-    public int undirectedGraphTraversalWays(int[][] nums,int n){
+        //分割商品成Items
+        //TODO 商品的peiecePrice被修改后的情况怎么办
+        if(product.piecePrice<=product.price){
 
-       graph=new ArrayList[n];
+            int pieceCount=product.price/product.piecePrice;
 
-        for(int i=0;i<n;i++){
-            graph[i]=new ArrayList();
+            IntStream.range(0,pieceCount).forEach(i->splitProductToItem(product));
+
         }
+        
+        @Entity
+public class Item extends BasicGenericModel {
+    @Id
+    public String id;
 
-        visited=new boolean[n];
-
-        for(int i=0;i<nums.length;i++){
-            graph[nums[i][0]-1].add(nums[i][1]-1);
-            graph[nums[i][1]-1].add(nums[i][0]-1);
-        }
-
-
-        visited[0]=true;
-        undirectedGraphTraversalWaysHelper(graph[0]);
-        return count;
-
-    }
-
-
-    private boolean undirectedGraphTraversalWaysHelper(ArrayList nodes){
-
-
-        boolean flag=true;
-        for(boolean visitedFlag:visited){
-            flag&=visitedFlag;
-        }
-
-        if(flag){
-            return true;
-        }
-
-
-        for(Object node:nodes){
-
-            int index=((Integer) node).intValue();
-
-            if(visited[index]){
-                continue;
-            }
-            visited[index]=true;
-
-            if(undirectedGraphTraversalWaysHelper(graph[index])){
-                count++;
-            }
-
-            visited[index]=false;
-        }
-
-        return false;
+    //外键 Product.id
+    @OneToOne()
+    @JoinColumn(name="id")
+    public Product product;
 
 
 
-    }
 
+
+}
